@@ -1,11 +1,10 @@
-package scooterTest;
+package ru.yandex.praktikum.scooter;
 
 
 import org.junit.Before;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import pageObjects.MainPage;
 
 
 public class OrderButtonOnMainPageTest {

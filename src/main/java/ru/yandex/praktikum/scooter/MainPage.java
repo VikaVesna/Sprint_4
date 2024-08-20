@@ -1,4 +1,4 @@
-package pageObjects;
+package ru.yandex.praktikum.scooter;
 
 
 import org.hamcrest.MatcherAssert;

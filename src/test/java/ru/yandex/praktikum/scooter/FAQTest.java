@@ -1,11 +1,10 @@
-package scooterTest;
+package ru.yandex.praktikum.scooter;
 
 
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.WebDriver;
-import pageObjects.MainPage;
 
 
 @RunWith(Parameterized.class)

@@ -1,5 +1,6 @@
-package pageObjects;
+package ru.yandex.praktikum.scooter;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,6 +17,7 @@ public class OrderPageOneWhoIsTheScooterFor {
     private By metroStationField = By.xpath(".//input[@placeholder='* Станция метро']");
     private By phoneField = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
     private By furtherButton = By.cssSelector(".Button_Button__ra12g.Button_Middle__1CSJM");
+    private By aboutRentPage = By.xpath(".//div[@class='Order_Header__BZXOb']");
 
     public OrderPageOneWhoIsTheScooterFor(WebDriver driver) {
         this.driver = driver;
@@ -47,7 +49,7 @@ public class OrderPageOneWhoIsTheScooterFor {
 
     // Выбор станции метро
     public void fillMetroStation(int metroId) {
-        driver.findElement(By.cssSelector("li[data-index=\""+metroId+"\"]")).click();
+        driver.findElement(By.cssSelector("li[data-index=\"" + metroId + "\"]")).click();
     }
 
     // Заполнить поле телефон
@@ -60,8 +62,8 @@ public class OrderPageOneWhoIsTheScooterFor {
         driver.findElement(furtherButton).click();
     }
 
-//     Метод заполнения всей формы Для кого самокат
-    public void fillWhoIsTheScooterFor (String name, String surname, String address, int metroId, String phone) {
+    //     Метод заполнения всей формы Для кого самокат
+    public void fillWhoIsTheScooterFor(String name, String surname, String address, int metroId, String phone) {
         fillNameField(name);
         fillSurnameField(surname);
         fillAddressField(address);
@@ -69,5 +71,19 @@ public class OrderPageOneWhoIsTheScooterFor {
         fillMetroStation(metroId);
         fillPhoneField(phone);
         clickFurtherButton();
+    }
+
+    // Проверка перехода на следующую страницу при валидных данных
+    public void checkInfoOrderPageOne (boolean isCorrect) {
+        if (isCorrect) {
+            // Если данные валидны, форма переходит на следующий шаг
+            Assert.assertTrue("Происходит переход на страницу Про аренду",
+                    driver.findElements(aboutRentPage).size() > 0);
+
+        } else {
+            //  Если данные не валидны, форма не переходит на следующий шаг
+            Assert.assertFalse("Не происходит переход на страницу Про аренду",
+                    driver.findElements(aboutRentPage).size() == 0);
+        }
     }
 }

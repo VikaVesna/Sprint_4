@@ -1,12 +1,10 @@
-package scooterTest;
+package ru.yandex.praktikum.scooter;
 
 import org.junit.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pageObjects.MainPage;
-import pageObjects.OrderPageOneWhoIsTheScooterFor;
 
 @RunWith(Parameterized.class)
 public class OrderPageOneWhoIsTheScooterForTest {
@@ -63,24 +61,7 @@ public class OrderPageOneWhoIsTheScooterForTest {
         WebDriver driver = driverRule.getDriver();
         var orderFirstPage = new OrderPageOneWhoIsTheScooterFor(driver);
 
-        orderFirstPage.fillNameField(name);
-        orderFirstPage.fillSurnameField(surname);
-        orderFirstPage.fillAddressField(address);
-        orderFirstPage.clickMetroStationField();
-        orderFirstPage.fillMetroStation(metroId);
-        orderFirstPage.fillPhoneField(phone);
-        orderFirstPage.clickFurtherButton();
-
-        By aboutRent = By.xpath(".//div[@class='Order_Header__BZXOb']");
-        if (isCorrect) {
-            // Если данные валидны, форма переходит на следующий шаг
-            Assert.assertTrue("Происходит переход на страницу Про аренду",
-                    driver.findElements(aboutRent).size() > 0);
-
-        } else {
-            //  Если данные не валидны, форма не переходит на следующий шаг
-            Assert.assertFalse("Не происходит переход на страницу Про аренду",
-                    driver.findElements(aboutRent).size() == 0);
-        }
+        orderFirstPage.fillWhoIsTheScooterFor(name, surname, address, metroId, phone);
+        orderFirstPage.checkInfoOrderPageOne(isCorrect);
     }
 }
